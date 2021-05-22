@@ -1,0 +1,33 @@
+{
+  "name": "tarea-3",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
+    "leaflet": "^1.7.1",
+    "next": "10.2.2",
+    "query-string": "^6.13.1",
+    "react": "17.0.2",
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^17.0.2",
+    "react-emoji": "^0.5.0",
+    "react-leaflet": "^3.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scroll-to-bottom": "^3.0.0",
+    "react-strap": "0.0.1",
+    "reactstrap": "^8.4.1",
+    "sass": "^1.26.5",
+    "socket.io-client": "^2.3.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
+}

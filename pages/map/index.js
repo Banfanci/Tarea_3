@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import {Input} from '../../components/Input';
 import {Messages} from '../../components/Messages';
 import {InfoBar} from '../../components/InfoBar';
+import {Vuelos} from '../../components/Vuelos';
 
 const ENDPOINT = "wss://tarea-3-websocket.2021-1.tallerdeintegracion.cl";
 const socket = socketIOClient(ENDPOINT, {
@@ -59,7 +60,7 @@ export default function Home() {
 
     socket.on('POSITION', pos => {
       if (! vuelosRegistrados.includes(pos.code)){
-        rutas[vuelo.code] = [];
+        rutas[pos.code] = [];
         requestFlights();
       }
       
@@ -95,6 +96,9 @@ export default function Home() {
               <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
             </div>
         </div>
+      </div>
+      <div className="vuelos">
+        <Vuelos vuelos={flights}/>
       </div>
     </div >
   );

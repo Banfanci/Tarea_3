@@ -25,6 +25,9 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [flights, setFlights] = useState([]);
+  const [vuelosRegistrados, setVuelosRegistrados] = useState([]);
+  const [rutas, setRutas] = useState({});
+  const [actual, setActual] = useState({});
 
   const requestFlights = () => {
     socket.emit('FLIGHTS');
@@ -44,6 +47,27 @@ export default function Home() {
 
     socket.on('FLIGHTS', vuelos => {
       setFlights(things => [...vuelos]);
+      vuelos.forEach(vuelo => {
+        if (! vuelosRegistrados.includes(vuelo.code)){
+          vuelosRegistrados.push(vuelo.code);
+          rutas[vuelo.code] = [];
+        }
+      });
+      setVuelosRegistrados([...vuelosRegistrados]);
+      setRutas({...rutas});
+    });
+
+    socket.on('POSITION', pos => {
+      if (! vuelosRegistrados.includes(pos.code)){
+        rutas[vuelo.code] = [];
+        requestFlights();
+      }
+      
+      actual[pos.code] = pos.position;
+      setActual({...actual});
+
+      rutas[pos.code].push(pos.position);
+      setActual({...rutas});
     });
   }, []);
 
@@ -62,7 +86,7 @@ export default function Home() {
     <div>
       <div className="map-chat">
         <div className="mapa">
-          <Map />
+          <Map places={flights} rutas={rutas} actual={[]}/>
         </div>
         <div className="outerContainer">
             <div className="container">
@@ -71,10 +95,7 @@ export default function Home() {
               <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
             </div>
         </div>
-
       </div>
-        
-      
     </div >
   );
 }
